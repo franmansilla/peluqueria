@@ -52,7 +52,8 @@ $(document).ready(function () {
                     });
                     $(':input[type="submit"]').prop('disabled', false);
                     if (Object.entries(horas).length === 0) {
-                        template += `<option disabled selected>No hay turnos disponibles. Por favor seleccione otro dia</option>`
+                        window.alert('No hay turnos disponibles. Por favor seleccione otro dia');
+                        template += `<option disabled selected>--</option>`
                         $(':input[type="submit"]').prop('disabled', true);
                     }
                     $('#hora').html(template);

@@ -9,11 +9,21 @@ img{
   border: none !important;
 }
 
-body{
+html, body{
     font-family: Arial, Helvetica, sans-serif;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    margin: 0;
+    display: flex;
+  flex-direction: column;
     background-color: #E2E3DD;
+    
+}
+.container{
+    display: flex;
+    justify-content: center;
+  align-items: center;
+    height:100%;
+    width: 100%;
 }
 .izq{
     text-align: left;
@@ -50,11 +60,13 @@ h3{
    margin-top: 1rem;
   }
   #name{
-      font-size: 2vw;
+    height : 8vh;
+      font-size: 2vh;
       background-color:#C2C8CC ;
   }
   .form-select{
-    font-size: 2vw;
+    height : 8vh;
+    font-size: 2vh;
     background-color:#C2C8CC ;
   }
   .resultado{
