@@ -17,28 +17,8 @@ while ($d <= $h) {
 foreach ($dias as &$dia) {
   $bandera = 0;
   while ($row = mysqli_fetch_array($result)) {
-    switch (date("N", strtotime($dia))) {
-      case 1:
-        echo "lunes";
-        break;
-      case 2:
-        echo "martes";
-        break;
-      case 3:
-        echo "miercoles";
-        break;
-      case 4:
-        echo "jueves";
-        break;
-      case 5:
-        echo "viernes";
-        break;
-      case 6:
-        echo "sabado";
-        break;
-      case 7:
-        echo "domingo";
-        break;
+    if (date("N", strtotime($dia))==$row['IDDia'] and $row['Habilitado']=='0') {
+     $bandera= 1;
     }
   }
   mysqli_data_seek($result, 0);
@@ -50,3 +30,7 @@ foreach ($dias as &$dia) {
 }
 $jsonstring = json_encode($json);
 echo $jsonstring;
+
+/* mysqli_free_result($result);
+mysqli_free_result($result1); */
+?>

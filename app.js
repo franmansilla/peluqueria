@@ -12,12 +12,18 @@ $(document).ready(function () {
             success: function (response) {
 
                 if (!response.error) {
-                    /* let dias = JSON.parse(response);
-                    let template = '<option hidden selected>Seleccione un dia</option>'; */
-                    console.log(response);
+                    var options = { weekday: "long", month: "long", day: "numeric" };
+                    let dias = JSON.parse(response);
+                    let template = '<option hidden selected>Seleccione un dia</option>';
+                    dias.forEach(dia => {
+                        let dd = new Date(dia.dia);
+                        template += `
+                        '<option value=${dd.toLocaleDateString()}>${dd.toLocaleDateString('es-AR', options)}</option>'
+                              `
+                    });
                     $('#2').show();
                     $('#1').hide();
-                   /*  $('#fecha').html(template); */
+                    $('#fecha').html(template);
                 }
 
             }
@@ -44,6 +50,11 @@ $(document).ready(function () {
                         <option value="${hora.hora}">${hora.hora}</option>
                         `
                     });
+                    $(':input[type="submit"]').prop('disabled', false);
+                    if (Object.entries(horas).length === 0) {
+                        template += `<option disabled selected>No hay turnos disponibles. Por favor seleccione otro dia</option>`
+                        $(':input[type="submit"]').prop('disabled', true);
+                    }
                     $('#hora').html(template);
                 }
             }
@@ -55,20 +66,36 @@ $(document).ready(function () {
         let dia = $('#fecha').val();
         let info = dia.split('/');
         let fecha = info[2] + '-' + info[1] + '-' + info[0];
-
         const postData = {
             name: $('#name').val(),
             hora: $('#hora').val(),
             fecha: fecha
         };
-        $.post('insert-turno.php', postData, function(response){
-            
-                            if (!response.error) {
-                    console.log(response);
-                }
-            
+        $.post('insert-turno.php', postData, function (response) {
+
+            if (!response.error) {
+                var options = { month: "long", day: "numeric" };
+                let reserva = JSON.parse(response);
+                let dia = '';
+                let hora = '';
+                reserva.forEach(r => {
+                    dia += `<h3 id="diar" >${new Date(r.fecha).toLocaleDateString('es-AR', options)}</h3>`;
+                    hora += `<h3 id="horar" >${r.hora} HRS</h3>`;
+                })
+
+                $('#diar').html(dia);
+                $('#horar').html(hora);
+                $('#3').show();
+                $('#2').hide();
+            }
+
+
+
 
         });
-        
+
+    });
+    $('#back').click(function() {
+        location.reload();
     });
 });
