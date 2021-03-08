@@ -2,7 +2,7 @@
 include('../conexion.php');
 $fecha = $_POST['fecha'];
 if (!empty($fecha)) {
-  $query = "SELECT hora, nombre  from turnos where dia='$fecha'";
+  $query = "SELECT ID, hora, nombre  from turnos where dia='$fecha'";
   $query1 = "select DesdeM,HastaM,DesdeT,HastaT from usuarios where id=1";
   $result = mysqli_query($conexion, $query);
   $result1 = mysqli_query($conexion, $query1);
@@ -39,6 +39,7 @@ if (!empty($fecha)) {
       if ($hora == date("H:i", strtotime($row['hora']))) {
         $bandera = 1;
         $json[] = array(
+          'Id'=> $row['ID'],
           'hora' => $hora,
           'nombre'=> $row['nombre']
         );
@@ -47,6 +48,7 @@ if (!empty($fecha)) {
     mysqli_data_seek($result,0);
     if ($bandera == 0) {
       $json[] = array(
+        'Id'=> "",
         'hora' => $hora,
         'nombre'=> ""
       );

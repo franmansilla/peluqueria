@@ -16,7 +16,7 @@ $(document).ready(function () {
                     let dias = JSON.parse(response);
                     let template = '<option hidden selected>Seleccione un dia</option>';
                     dias.forEach(dia => {
-                        let dd = new Date(dia.dia);
+                        let dd = new Date(dia.dia.replace(/-/g, '\/'));
                         template += `
                         '<option value=${dd.toLocaleDateString()}>${dd.toLocaleDateString('es-AR', options)}</option>'
                               `

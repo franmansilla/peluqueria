@@ -22,7 +22,22 @@
                 </div>
 
                 <div id="Configuracion" class="tab" style="display:none">
-                    Configuracion
+                    Horario Laboral
+                    <form id="confirmar">
+                        DIA     <br>
+                        <span id="dias">
+
+                        </span><br>
+                        HORARIO <br> 
+                        <select class="form-select" aria-label="Default select example" id="dm" required>
+                        </select><select class="form-select" aria-label="Default select example" id="hm" required>
+                        </select><br><select class="form-select" aria-label="Default select example" id="dt" required>
+                        </select><select class="form-select" aria-label="Default select example" id="ht" required>
+                        </select>
+                        <button type="submit" class="btn btn-primary">
+                            CONFIRMAR
+                        </button>
+                    </form>
                 </div>
                 <button class="" onclick="openTab('Calendario')">Calendario</button>
                 <button class="" onclick="openTab('Configuracion')">Configuracion</button>
